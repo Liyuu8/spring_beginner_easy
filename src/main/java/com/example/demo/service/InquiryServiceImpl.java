@@ -35,6 +35,9 @@ public class InquiryServiceImpl implements InquiryService {
 
 	@Override
 	public List<Inquiry> getAll() {
+		if (dao.getAll().isEmpty()) {
+			throw new InquiryNotFoundException("SQL error");
+		}
 		return dao.getAll();
 	}
 }

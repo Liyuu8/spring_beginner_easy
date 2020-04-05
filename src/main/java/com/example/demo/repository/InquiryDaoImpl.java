@@ -15,16 +15,16 @@ import com.example.demo.entity.Inquiry;
 @Repository
 public class InquiryDaoImpl implements InquiryDao {
 
-	private final JdbcTemplate JdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public InquiryDaoImpl(JdbcTemplate JdbcTemplate) {
-		this.JdbcTemplate = JdbcTemplate;
+	public InquiryDaoImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	@Override
 	public void insertInquiry(Inquiry inquiry) {
-		JdbcTemplate.update("INSERT INTO inquiry(name, email, contents, created) VALUES(?, ?, ?, ?)", inquiry.getName(),
+		jdbcTemplate.update("INSERT INTO inquiry(name, email, contents, created) VALUES(?, ?, ?, ?)", inquiry.getName(),
 				inquiry.getEmail(), inquiry.getContents(), inquiry.getCreated());
 	}
 
@@ -40,7 +40,7 @@ public class InquiryDaoImpl implements InquiryDao {
 	@Override
 	public List<Inquiry> getAll() {
 		String sql = "SELECT id, name, email, contents, created FROM inquiry";
-		List<Map<String, Object>> resultList = JdbcTemplate.queryForList(sql);
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
 		List<Inquiry> list = new ArrayList<>();
 		for (Map<String, Object> result : resultList) {
 			Inquiry inquiry = new Inquiry();

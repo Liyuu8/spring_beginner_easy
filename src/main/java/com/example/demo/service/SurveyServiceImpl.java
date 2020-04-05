@@ -9,23 +9,23 @@ import com.example.demo.entity.Survey;
 import com.example.demo.repository.SurveyDao;
 
 @Service
-public class SurveyServiceImpl implements SurveyService{
+public class SurveyServiceImpl implements SurveyService {
 
 	private final SurveyDao dao;
-	
+
 	@Autowired
-	SurveyServiceImpl(SurveyDao dao){
+	SurveyServiceImpl(SurveyDao dao) {
 		this.dao = dao;
 	}
-	
+
 	@Override
 	public void save(Survey survey) {
-		//hands-on
+		dao.insertSurvey(survey);
 	}
 
 	@Override
 	public List<Survey> getAll() {
-		if(dao.getAll().isEmpty()) {
+		if (dao.getAll().isEmpty()) {
 			throw new InquiryNotFoundException("SQL error");
 		}
 		return dao.getAll();
