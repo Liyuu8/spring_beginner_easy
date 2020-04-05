@@ -19,61 +19,72 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Inquiry;
 import com.example.demo.service.InquiryNotFoundException;
-import com.example.demo.service.InquiryServiceImpl;
+import com.example.demo.service.InquiryService;
 
 @Controller
 @RequestMapping("/inquiry")
 public class InquiryController {
-	
-// 	private final InquiryServiceImpl inquiryService;
-	
-	//Add an annotation here 
-// 	public InquiryController(InquiryServiceImpl inquiryService){
-// 		this.inquiryService = inquiryService;
-// 	}
-	
+
+	private final InquiryService inquiryService;
+
+	@Autowired
+	public InquiryController(InquiryService inquiryService) {
+		this.inquiryService = inquiryService;
+	}
+
 	@GetMapping
 	public String index(Model model) {
-		
-		//hands-on
-		
+
+		List<Inquiry> list = inquiryService.getAll();
+		model.addAttribute("inquiryList", list);
+		model.addAttribute("title", "Inquiry Index");
+
 		return "inquiry/index";
 	}
-	
+
 	@GetMapping("/form")
 	public String form(InquiryForm inquiryForm, Model model, @ModelAttribute("complete") String complete) {
 
 		model.addAttribute("title", "Inquiry Form");
 		return "inquiry/form";
 	}
-	
+
 	@PostMapping("/form")
 	public String formGoBack(InquiryForm inquiryForm, Model model) {
 
 		model.addAttribute("title", "Inquiry Form");
 		return "inquiry/form";
 	}
-	
+
 	@PostMapping("/confirm")
 	public String confirm(@Validated InquiryForm inquiryForm, BindingResult result, Model model) {
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.addAttribute("title", "Inquiry Form");
 			return "inquiry/form";
 		}
 		model.addAttribute("title", "Confirm Page");
 		return "inquiry/confirm";
 	}
-	
+
 	@PostMapping("/complete")
-	public String complete(@Validated InquiryForm inquiryForm, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-		
-		if(result.hasErrors()) {
+	public String complete(@Validated InquiryForm inquiryForm, BindingResult result, Model model,
+			RedirectAttributes redirectAttributes) {
+
+		if (result.hasErrors()) {
 			model.addAttribute("title", "Inquiry Form");
 			return "inquiry/form";
 		}
+
+		Inquiry inquiry = new Inquiry();
+		inquiry.setName(inquiryForm.getName());
+		inquiry.setEmail(inquiryForm.getEmail());
+		inquiry.setContents(inquiryForm.getContents());
+		inquiry.setCreated(LocalDateTime.now());
+
+		inquiryService.save(inquiry);
+
 		redirectAttributes.addFlashAttribute("complete", "Registered!");
 		return "redirect:/inquiry/form";
 	}
-	
 }
