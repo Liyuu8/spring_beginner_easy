@@ -37,7 +37,7 @@ public class InquiryController {
 
 		List<Inquiry> list = inquiryService.getAll();
 
-		// error発生
+		// 例外発生
 		// Inquiry inquiry = new Inquiry();
 		// inquiry.setId(4);
 		// inquiry.setName("Jemie");
@@ -55,21 +55,21 @@ public class InquiryController {
 		model.addAttribute("inquiryList", list);
 		model.addAttribute("title", "Inquiry Index");
 
-		return "inquiry/index";
+		return "inquiry/index_boot";
 	}
 
 	@GetMapping("/form")
 	public String form(InquiryForm inquiryForm, Model model, @ModelAttribute("complete") String complete) {
 
 		model.addAttribute("title", "Inquiry Form");
-		return "inquiry/form";
+		return "inquiry/form_boot";
 	}
 
 	@PostMapping("/form")
 	public String formGoBack(InquiryForm inquiryForm, Model model) {
 
 		model.addAttribute("title", "Inquiry Form");
-		return "inquiry/form";
+		return "inquiry/form_boot";
 	}
 
 	@PostMapping("/confirm")
@@ -77,10 +77,10 @@ public class InquiryController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Inquiry Form");
-			return "inquiry/form";
+			return "inquiry/form_boot";
 		}
 		model.addAttribute("title", "Confirm Page");
-		return "inquiry/confirm";
+		return "inquiry/confirm_boot";
 	}
 
 	@PostMapping("/complete")
@@ -89,7 +89,7 @@ public class InquiryController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Inquiry Form");
-			return "inquiry/form";
+			return "inquiry/form_boot";
 		}
 
 		Inquiry inquiry = new Inquiry();

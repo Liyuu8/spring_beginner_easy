@@ -1,35 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+  <title>Starter Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css"  th:href="@{/css/starter-template.css}" rel="stylesheet">
-  </head>
+  <!-- Custom styles for this template -->
+  <link href="starter-template.css" th:href="@{/css/starter-template.css}" rel="stylesheet">
+</head>
 
-  <body>
+<body>
 
 
-    <div th:replace="~{block/header_boot::headerA_boot}"></div>
-    <main role="main" class="container">
+  <div th:replace="~{block/header_boot::headerA_boot}"></div>
+  <main role="main" class="container">
 
-      <div class="starter-template">
-        <h1 th:text="${title}">Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
-      
+    <div class="starter-template">
+      <h1 th:text="${title}">Bootstrap starter template</h1>
+      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
+        mostly barebones HTML document.</p>
+    </div>
 
-	<div th:unless="${#strings.isEmpty(complete)}" >
+
+    <div th:unless="${#strings.isEmpty(complete)}" >
 		<div th:text="${complete}" class="alert alert-success" role="alert">
 		  A simple success alert—check it out!
 		</div>

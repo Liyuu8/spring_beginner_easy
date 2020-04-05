@@ -2,19 +2,18 @@ package com.example.demo.app.inquiry;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-
-import lombok.NonNull;
+import javax.validation.constraints.NotNull;
 
 public class InquiryForm {
 
 	@Size(min = 1, max = 20, message = "Please input 20characters or less")
 	private String name;
 
-	@NonNull
+	@NotNull
 	@Email(message = "Invalid E-mail Format")
 	private String email;
 
-	@NonNull
+	@NotNull
 	private String contents;
 
 	public InquiryForm() {
